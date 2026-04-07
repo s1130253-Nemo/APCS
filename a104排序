@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std; 
+int n;
+int main()
+{
+	
+	while(cin>>n)
+	{
+	//設需要幾個變數 
+	int arr[n];
+	//輸入 
+	for(int i=0;i<n;i++)
+    cin>>arr[i];
+    sort(arr,arr+n);
+    //先輸出第一項 
+	cout<<arr[0]<<" ";
+	//再把後面幾項輸出出來 
+	for(int i=1;i<n;i++)
+    cout<<arr[i]<<" ";
+	cout<<endl;	
+	} 
+	
+	return 0;
+}
