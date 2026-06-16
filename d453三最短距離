@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int dr[] = {-1, 1, 0, 0};
+int dc[] = {0, 0, -1, 1};
+
+void solve() {
+    int n, m, start_r, start_c, end_r, end_c;
+    cin >> n >> m >> start_r >> start_c >> end_r >> end_c;
+
+
+    char maze[105][105];
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            cin >> maze[i][j];
+        }
+    }
+
+
+    int dist[105][105];
+    memset(dist, 0, sizeof(dist));
+
+  
+    queue<int> q_row;
+    queue<int> q_col;
+
+
+    q_row.push(start_r);
+    q_col.push(start_c);
+    dist[start_r][start_c] = 1;
+
+    bool found = false; 
+
+
+    while (!q_row.empty()) {
+
+        int r = q_row.front();
+        int c = q_col.front();
+        q_row.pop();
+        q_col.pop();
+
+ 
+        if (r == end_r && c == end_c) {
+            cout << dist[r][c] << "\n";
+            found = true;
+            break; 
+        }
+
+
+        for (int i = 0; i < 4; i++) {
+            int next_r = r + dr[i];
+            int next_c = c + dc[i];
+
+
+            if (next_r >= 1 && next_r <= n && next_c >= 1 && next_c <= m) { 
+                if (maze[next_r][next_c] == '0') {                         
+                    if (dist[next_r][next_c] == 0) {                        
+                        
+                        
+                        dist[next_r][next_c] = dist[r][c] + 1; 
+                        q_row.push(next_r);                     
+                        q_col.push(next_c);
+                    }
+                }
+            }
+        }
+    }
+
+    
+    if (!found) {
+        cout << 0 << "\n";
+    }
+}
+
+int main() {
+    
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int t;
+    if (cin >> t) {
+        while (t--) {
+            solve(); 
+        }
+    }
+    return 0;
+}
